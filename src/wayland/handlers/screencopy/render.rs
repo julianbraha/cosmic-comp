@@ -222,7 +222,7 @@ pub fn render_workspace_to_buffer(
         mut age: usize,
         additional_damage: Vec<Rectangle<i32, BufferCoords>>,
         draw_cursor: bool,
-        common: &mut Common,
+        common: &Common,
         output: &Output,
         handle: (WorkspaceHandle, usize),
     ) -> Result<RenderOutputResult<'d>, DTError<R>>
@@ -461,7 +461,7 @@ pub fn render_window_to_buffer(
         mut age: usize,
         additional_damage: Vec<Rectangle<i32, BufferCoords>>,
         draw_cursor: bool,
-        common: &mut Common,
+        common: &Common,
         window: &CosmicSurface,
         geometry: Rectangle<i32, Logical>,
     ) -> Result<RenderOutputResult<'d>, DTError<R>>
@@ -698,7 +698,7 @@ pub fn render_cursor_to_buffer(
         dt: &'d mut OutputDamageTracker,
         mut age: usize,
         additional_damage: Vec<Rectangle<i32, BufferCoords>>,
-        common: &mut Common,
+        common: &Common,
         seat: &Seat<State>,
     ) -> Result<RenderOutputResult<'d>, DTError<R>>
     where

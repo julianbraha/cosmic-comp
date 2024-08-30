@@ -728,7 +728,7 @@ impl FloatingLayout {
         self.space.element_geometry(elem).map(RectExt::as_local)
     }
 
-    pub fn element_under(&mut self, location: Point<f64, Local>) -> Option<KeyboardFocusTarget> {
+    pub fn element_under(&self, location: Point<f64, Local>) -> Option<KeyboardFocusTarget> {
         self.space
             .element_under(location.as_logical())
             .map(|(mapped, _)| mapped.clone().into())
@@ -770,7 +770,7 @@ impl FloatingLayout {
     }
 
     pub fn resize_request(
-        &mut self,
+        &self,
         mapped: &CosmicMapped,
         seat: &Seat<State>,
         start_data: GrabStartData,
@@ -797,7 +797,7 @@ impl FloatingLayout {
     }
 
     pub fn resize(
-        &mut self,
+        &self,
         focused: &KeyboardFocusTarget,
         direction: ResizeDirection,
         edge: ResizeEdge,

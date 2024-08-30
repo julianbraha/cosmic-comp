@@ -15,7 +15,7 @@ pub mod x11;
 
 pub fn init_backend_auto(
     dh: &DisplayHandle,
-    event_loop: &mut EventLoop<'static, State>,
+    event_loop: &EventLoop<'static, State>,
     state: &mut State,
 ) -> Result<()> {
     let res = match std::env::var("COSMIC_BACKEND") {

@@ -599,7 +599,7 @@ impl CosmicStack {
         self.0.force_redraw();
     }
 
-    fn start_drag(&self, data: &mut State, seat: &Seat<State>, serial: Serial) {
+    fn start_drag(&self, data: &State, seat: &Seat<State>, serial: Serial) {
         if let Some(dragged_out) = self
             .0
             .with_program(|p| p.potential_drag.lock().unwrap().take())

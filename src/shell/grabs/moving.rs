@@ -342,7 +342,7 @@ pub struct MoveGrab {
 }
 
 impl MoveGrab {
-    fn update_location(&mut self, state: &mut State, location: Point<f64, Logical>) {
+    fn update_location(&mut self, state: &State, location: Point<f64, Logical>) {
         let mut shell = state.common.shell.write().unwrap();
 
         let Some(current_output) =

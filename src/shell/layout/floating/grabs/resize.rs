@@ -491,7 +491,7 @@ impl ResizeSurfaceGrab {
         }
     }
 
-    fn ungrab(&mut self) {
+    fn ungrab(&self) {
         // No more buttons are pressed, release the grab.
         self.seat
             .user_data()

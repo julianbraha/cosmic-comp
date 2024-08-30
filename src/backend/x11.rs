@@ -162,10 +162,7 @@ impl X11State {
         }
     }
 
-    pub fn apply_config_for_outputs(
-        &mut self,
-        test_only: bool,
-    ) -> Result<Vec<Output>, anyhow::Error> {
+    pub fn apply_config_for_outputs(&self, test_only: bool) -> Result<Vec<Output>, anyhow::Error> {
         // TODO: if we ever have multiple winit outputs, don't juse use the first and don't ignore OutputState
 
         let surface = self.surfaces.first().unwrap();
@@ -201,7 +198,7 @@ pub struct Surface {
 }
 
 impl Surface {
-    pub fn render_output(&mut self, renderer: &mut GlowRenderer, state: &mut Common) -> Result<()> {
+    pub fn render_output(&mut self, renderer: &mut GlowRenderer, state: &Common) -> Result<()> {
         let (buffer, age) = self
             .surface
             .buffer()
@@ -304,7 +301,7 @@ fn try_gbm_allocator(fd: OwnedFd) -> Option<Allocator> {
 
 pub fn init_backend(
     dh: &DisplayHandle,
-    event_loop: &mut EventLoop<State>,
+    event_loop: &EventLoop<State>,
     state: &mut State,
 ) -> Result<()> {
     let backend = X11Backend::new().with_context(|| "Failed to initilize X11 backend")?;
@@ -456,7 +453,7 @@ fn init_egl_client_side<R>(
     dh: &DisplayHandle,
     state: &mut State,
     render_node: DrmNode,
-    renderer: &mut R,
+    renderer: &R,
 ) -> Result<()>
 where
     R: ImportDma,

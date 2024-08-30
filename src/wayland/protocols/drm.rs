@@ -221,7 +221,7 @@ where
 
 impl<R: 'static> WlDrmState<R> {
     pub fn create_global<D>(
-        &mut self,
+        &self,
         display: &DisplayHandle,
         device_path: PathBuf,
         formats: FormatSet,
@@ -240,7 +240,7 @@ impl<R: 'static> WlDrmState<R> {
     }
 
     pub fn create_global_with_filter<D, F>(
-        &mut self,
+        &self,
         display: &DisplayHandle,
         device_path: PathBuf,
         formats: FormatSet,

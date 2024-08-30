@@ -689,7 +689,7 @@ where
     }
 
     pub fn group_capabilities(
-        &mut self,
+        &self,
         group: &WorkspaceGroupHandle,
     ) -> Option<impl Iterator<Item = &GroupCapabilities>> {
         self.0.group_capabilities(group)

@@ -217,7 +217,7 @@ impl ResizeForkGrab {
 
 impl ResizeForkGrab {
     // Returns `true` if grab should be unset
-    fn update_location(&mut self, data: &mut State, location: Point<f64, Logical>) -> bool {
+    fn update_location(&mut self, data: &State, location: Point<f64, Logical>) -> bool {
         let delta = location - self.last_loc.as_logical();
 
         if let Some(output) = self.output.upgrade() {

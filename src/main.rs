@@ -181,9 +181,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn init_wayland_display(
-    event_loop: &mut EventLoop<state::State>,
-) -> Result<(DisplayHandle, OsString)> {
+fn init_wayland_display(event_loop: &EventLoop<state::State>) -> Result<(DisplayHandle, OsString)> {
     let display = Display::new().unwrap();
     let handle = display.handle();
 

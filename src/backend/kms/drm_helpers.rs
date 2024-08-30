@@ -16,7 +16,7 @@ use std::{
 };
 
 pub fn display_configuration(
-    device: &mut impl ControlDevice,
+    device: &impl ControlDevice,
     supports_atomic: bool,
 ) -> Result<HashMap<connector::Handle, Option<crtc::Handle>>> {
     let res_handles = device.resource_handles()?;

@@ -99,10 +99,7 @@ impl WinitState {
         Ok(())
     }
 
-    pub fn apply_config_for_outputs(
-        &mut self,
-        test_only: bool,
-    ) -> Result<Vec<Output>, anyhow::Error> {
+    pub fn apply_config_for_outputs(&self, test_only: bool) -> Result<Vec<Output>, anyhow::Error> {
         // TODO: if we ever have multiple winit outputs, don't ignore config.enabled
         // reset size
         let size = self.backend.window_size();
@@ -125,7 +122,7 @@ impl WinitState {
 
 pub fn init_backend(
     dh: &DisplayHandle,
-    event_loop: &mut EventLoop<State>,
+    event_loop: &EventLoop<State>,
     state: &mut State,
 ) -> Result<()> {
     let (mut backend, mut input): (WinitGraphicsBackend<GlowRenderer>, _) =

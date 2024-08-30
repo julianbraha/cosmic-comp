@@ -382,7 +382,7 @@ fn constraints_for_toplevel(
 
 fn constraints_for_renderer(
     size: Size<i32, BufferCoords>,
-    renderer: &mut GlowRenderer,
+    renderer: &GlowRenderer,
 ) -> BufferConstraints {
     let mut constraints = BufferConstraints {
         size,

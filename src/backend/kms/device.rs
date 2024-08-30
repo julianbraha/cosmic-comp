@@ -576,7 +576,7 @@ impl Device {
     }
 }
 
-fn create_output_for_conn(drm: &mut DrmDevice, conn: connector::Handle) -> Result<Output> {
+fn create_output_for_conn(drm: &DrmDevice, conn: connector::Handle) -> Result<Output> {
     let conn_info = drm
         .get_connector(conn, false)
         .with_context(|| "Failed to query connector info")?;
@@ -609,7 +609,7 @@ fn create_output_for_conn(drm: &mut DrmDevice, conn: connector::Handle) -> Resul
 }
 
 fn populate_modes(
-    drm: &mut DrmDevice,
+    drm: &DrmDevice,
     output: &Output,
     conn: connector::Handle,
     position: (u32, u32),

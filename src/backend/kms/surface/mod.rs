@@ -377,19 +377,19 @@ impl Surface {
         let _ = self.thread_command.send(ThreadCommand::ScheduleRender);
     }
 
-    pub fn set_mirroring(&mut self, output: Option<Output>) {
+    pub fn set_mirroring(&self, output: Option<Output>) {
         let _ = self
             .thread_command
             .send(ThreadCommand::UpdateMirroring(output));
     }
 
-    pub fn set_mode(&mut self, mode: Mode) -> Result<()> {
+    pub fn set_mode(&self, mode: Mode) -> Result<()> {
         let (tx, rx) = std::sync::mpsc::sync_channel(1);
         let _ = self.thread_command.send(ThreadCommand::SetMode(mode, tx));
         rx.recv().context("Surface thread died")?
     }
 
-    pub fn suspend(&mut self) {
+    pub fn suspend(&self) {
         let _ = self.thread_command.send(ThreadCommand::Suspend);
     }
 
@@ -1314,7 +1314,7 @@ impl SurfaceThreadState {
         self.mirroring_textures.clear();
     }
 
-    fn send_frame_callbacks(&mut self) {
+    fn send_frame_callbacks(&self) {
         if self.mirroring.is_none() {
             let _ = self
                 .thread_sender
@@ -1322,7 +1322,7 @@ impl SurfaceThreadState {
         }
     }
 
-    fn send_dmabuf_feedback(&mut self, states: RenderElementStates) {
+    fn send_dmabuf_feedback(&self, states: RenderElementStates) {
         let _ = self
             .thread_sender
             .send(SurfaceCommand::RenderStates(states));

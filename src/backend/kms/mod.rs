@@ -64,7 +64,7 @@ pub struct KmsState {
 
 pub fn init_backend(
     dh: &DisplayHandle,
-    event_loop: &mut EventLoop<'static, State>,
+    event_loop: &EventLoop<'static, State>,
     state: &mut State,
 ) -> Result<()> {
     // establish session
@@ -398,7 +398,7 @@ impl KmsState {
         Err(last_err)
     }
 
-    pub fn schedule_render(&mut self, output: &Output) {
+    pub fn schedule_render(&self, output: &Output) {
         for surface in self
             .drm_devices
             .values()
