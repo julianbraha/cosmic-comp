@@ -580,19 +580,18 @@ impl KmsState {
                         device.drm.dev_path().as_deref().map(Path::display),
                     )
                 })?;
-                'outer: for encoder_info in conn_info
+                // find the first available crtc for each connection
+                if let Some(crtc) = conn_info
                     .encoders()
                     .iter()
                     .flat_map(|encoder_handle| device.drm.get_encoder(*encoder_handle))
+                    .flat_map(|encoder_info| {
+                        res_handles.filter_crtcs(encoder_info.possible_crtcs())
+                    })
+                    .find(|crtc| !free_crtcs.contains(crtc))
                 {
-                    for crtc in res_handles.filter_crtcs(encoder_info.possible_crtcs()) {
-                        if !free_crtcs.contains(&crtc) {
-                            new_pairings.insert(conn, crtc);
-                            break 'outer;
-                        }
-                    }
-
-                    // test failed, we don't have a crtc for conn
+                    new_pairings.insert(conn, crtc);
+                } else {
                     anyhow::bail!("Missing crtc for {conn:?}, gpu doesn't have enough resources.");
                 }
             }
